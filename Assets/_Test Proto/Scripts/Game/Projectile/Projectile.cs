@@ -25,10 +25,7 @@ namespace TestProto.Projectiles
 
 		public event Action<Projectile> OnMoveComplete;
 
-		public void Initialize()
-		{
-			gameObject.SetActive(false);
-		}
+		public void Initialize() => gameObject.SetActive(false);
 
 		private void OnTriggerEnter(Collider other)
 		{

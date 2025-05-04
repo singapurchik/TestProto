@@ -5,6 +5,7 @@ namespace TestProto.Players
 {
 	public class PlayerTurret : MonoBehaviour
 	{
+		[SerializeField] private Transform _turret;
 		[SerializeField] private TurretAttacker _attacker;
 		[SerializeField] private TurretRotator _rotator;
 		
@@ -22,7 +23,7 @@ namespace TestProto.Players
 		public void Rotate()
 		{
 			if (Mathf.Abs(_input.HorizontalInput) > MIN_INPUT_STEP_TO_ROTATE)
-				_rotator.Rotate(transform, _input.HorizontalInput);
+				_rotator.Rotate(_turret, _input.HorizontalInput);
 		}
 	}
 }
