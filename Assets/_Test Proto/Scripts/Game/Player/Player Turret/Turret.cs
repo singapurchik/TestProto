@@ -6,6 +6,7 @@ namespace TestProto.Players.Turrets
 	public class Turret : MonoBehaviour
 	{
 		[Inject] private IReadOnlyPlayerInput _input;
+		[Inject] private TurretAttacker _attacker;
 		[Inject] private TurretRotator _rotator;
 		
 		private bool _isActive;
@@ -18,9 +19,12 @@ namespace TestProto.Players.Turrets
 
 		private void Update()
 		{
-			if (_isActive && Mathf.Abs(_input.HorizontalInput) > MIN_INPUT_STEP_TO_ROTATE)
+			if (_isActive)
 			{
-				_rotator.Rotate(_input.HorizontalInput);
+				if (Mathf.Abs(_input.HorizontalInput) > MIN_INPUT_STEP_TO_ROTATE)
+					_rotator.Rotate(_input.HorizontalInput);
+				
+				_attacker.TryAttack();
 			}
 		}
 	}
