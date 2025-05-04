@@ -1,4 +1,3 @@
-using TestProto.Players.Turrets;
 using UnityEngine;
 using Zenject;
 
@@ -6,11 +5,14 @@ namespace TestProto.Players
 {
 	public class Player : MonoBehaviour
 	{
-		[Inject] private Turret _turret;
-		
-		private void Awake()
+		[Inject] private PlayerTurret _turret;
+		[Inject] private PlayerCar _car;
+
+		private void Update()
 		{
-			_turret.Enable();
+			_turret.TryAttack();
+			_turret.Rotate();
+			_car.Move();
 		}
 	}
 }

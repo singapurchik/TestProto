@@ -1,8 +1,10 @@
 using UnityEngine;
+using System;
 
-namespace TestProto.Players.Turrets
+namespace TestProto.Players
 {
-	public class TurretRotator : MonoBehaviour
+	[Serializable]
+	public class TurretRotator
 	{
 		[SerializeField] private float _rotationSpeed = 0.2f;
 		[SerializeField] private float _minZ = -40f;
@@ -11,15 +13,15 @@ namespace TestProto.Players.Turrets
 
 		private float _currentAngleZ;
 
-		private void Awake()
+		public void Initialize(float startAngleZ)
 		{
-			_currentAngleZ = transform.localEulerAngles.z;
+			_currentAngleZ = startAngleZ;
 			
 			if (_currentAngleZ > 180f)
 				_currentAngleZ -= 360f;
 		}
 		
-		public void Rotate(float delta)
+		public void Rotate(Transform transform, float delta)
 		{
 			var direction = _isInverted ? 1f : -1f;
 			_currentAngleZ = Mathf.Clamp(_currentAngleZ + delta * _rotationSpeed * direction, _minZ, _maxZ);

@@ -1,10 +1,12 @@
+using System;
 using TestProto.Projectiles;
 using UnityEngine;
 using Zenject;
 
-namespace TestProto.Players.Turrets
+namespace TestProto.Players
 {
-	public class TurretAttacker : MonoBehaviour
+	[Serializable]
+	public class TurretAttacker
 	{
 		[SerializeField] private ParticleSystem _attackEffect;
 		[SerializeField] private Transform _projectileSpawnPoint;
