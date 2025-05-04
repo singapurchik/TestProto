@@ -14,14 +14,8 @@ namespace TestProto.Players
 		
 		public void Enable() => IsActive = true;
 
-		private void Update()
+		private void UpdateHorizontalInput()
 		{
-			if (!IsActive)
-			{
-				HorizontalInput = 0f;
-				return;
-			}
-
 			if (Input.GetMouseButtonDown(0))
 			{
 				_lastPointerPosition = Input.mousePosition;
@@ -33,6 +27,18 @@ namespace TestProto.Players
 				var delta = currentPos - _lastPointerPosition;
 				HorizontalInput = delta.x;
 				_lastPointerPosition = currentPos;
+			}
+			else
+			{
+				HorizontalInput = 0f;
+			}
+		}
+
+		private void Update()
+		{
+			if (IsActive)
+			{
+				UpdateHorizontalInput();
 			}
 			else
 			{

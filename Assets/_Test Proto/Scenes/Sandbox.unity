@@ -122,6 +122,83 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &167506841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 167506842}
+  m_Layer: 0
+  m_Name: Projectile Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &167506842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167506841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.438, z: 0.849}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1651777060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &200823186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200823187}
+  - component: {fileID: 200823188}
+  m_Layer: 0
+  m_Name: Projectiles Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200823187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200823186}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 980172753}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &200823188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200823186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10deeb43f67a4e62b1d4f6155467e5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objects: []
+  _prefab: {fileID: 0}
 --- !u!1 &480602704
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +262,38 @@ Transform:
   m_Children:
   - {fileID: 8643668001371292283}
   m_Father: {fileID: 1444144015}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &980172752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980172753}
+  m_Layer: 0
+  m_Name: Pools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &980172753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980172752}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1000, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 200823187}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1007363204
 GameObject:
@@ -939,6 +1048,7 @@ GameObject:
   - component: {fileID: 1651777063}
   - component: {fileID: 1651777061}
   - component: {fileID: 1651777062}
+  - component: {fileID: 1651777064}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -961,6 +1071,7 @@ Transform:
   m_Children:
   - {fileID: 7303385749260851094}
   - {fileID: 6984795736798391565}
+  - {fileID: 167506842}
   m_Father: {fileID: 1273753760}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &1651777061
@@ -1005,6 +1116,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotator: {fileID: 1651777062}
   _turret: {fileID: 1651777061}
+--- !u!114 &1651777064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651777059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560558389775430689a905c31726fbe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackEffect: {fileID: 0}
+  _projectileSpawnPoint: {fileID: 0}
+  _range: 10
+  _damage: 50
 --- !u!1 &1728438531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,6 +1142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1728438533}
   - component: {fileID: 1728438532}
+  - component: {fileID: 1728438534}
   m_Layer: 0
   m_Name: Sandbox Scene Context
   m_TagString: Untagged
@@ -1035,7 +1163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 1728438534}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1068,6 +1197,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1728438534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728438531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca06e950a484b088783f6efc53f4baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectilePool: {fileID: 200823188}
 --- !u!1 &2032413998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,7 +2683,7 @@ Transform:
   m_GameObject: {fileID: 2667661132920052079}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071058, y: -0, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: -0.986, z: 0.914}
+  m_LocalPosition: {x: 0, y: -0.986, z: 0.851}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3044,3 +3186,4 @@ SceneRoots:
   - {fileID: 1233516070}
   - {fileID: 1444144015}
   - {fileID: 1356860980}
+  - {fileID: 980172753}

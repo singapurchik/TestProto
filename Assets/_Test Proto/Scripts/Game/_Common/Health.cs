@@ -3,7 +3,7 @@ using System;
 
 namespace TestProto
 {
-	public class Health : MonoBehaviour
+	public class Health : MonoBehaviour, IDamageable
 	{
 		[SerializeField] private int _startHealth = 100;
 		
@@ -14,9 +14,9 @@ namespace TestProto
 		public bool IsEmpty => CurrentHealth <= 0;
 
 		public event Action OnFullHealthTakeDamage;
+		public event Action OnZeroHealth;
 		public event Action OnTakeDamage;
 		public event Action OnTakeHeal;
-		public event Action OnZeroHealth;
 
 		private void Awake()
 		{
