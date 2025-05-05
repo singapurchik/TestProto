@@ -92,7 +92,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2869262542970706915}
+  - component: {fileID: 1032566670718644287}
   - component: {fileID: 7325149974936107111}
+  - component: {fileID: 4848419251951447161}
+  - component: {fileID: 1084535170191181163}
+  - component: {fileID: 3906649144316661481}
   - component: {fileID: 5412547460017521986}
   - component: {fileID: 3401476495535577317}
   m_Layer: 3
@@ -120,6 +124,25 @@ Transform:
   - {fileID: 1952098998207228324}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1032566670718644287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625464831895643822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12fb181d967f4226ac01933eac2176e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _carAnimator: {fileID: 1084535170191181163}
+  _mover: {fileID: 4848419251951447161}
+  _car: {fileID: 7325149974936107111}
+  _health: {fileID: 3906649144316661481}
+  _animatedRenderers:
+  - {fileID: 8227383914189016298}
+  - {fileID: 8264930373380706278}
 --- !u!114 &7325149974936107111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,11 +155,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c7fe6626cd451fa858f51c9e0ed5bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mover:
-    _forwardSpeed: 8
-    _horizontalMoveSpeed: 1
-    _maxHorizontalOffset: 4
-    _minHorizontalOffsetDelta: 0.5
+--- !u!114 &4848419251951447161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625464831895643822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999d718f6fdb45b8a95ab7b8fa4b455d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _forwardSpeed: 8
+  _horizontalMoveSpeed: 1
+  _maxHorizontalOffset: 4
+  _minHorizontalOffsetDelta: 0.5
+--- !u!114 &1084535170191181163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625464831895643822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f5936c9b93648e9b188c8b85aefdcc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _takeDamageAnimDuration: 0.1
+  _takeDamageColor: {r: 1, g: 0.60691816, b: 0.60691816, a: 1}
+  _punchScale: {x: 0.15, y: 0.15, z: 0}
+--- !u!114 &3906649144316661481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625464831895643822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a0ffb0d346445a8109e46581b8efe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startHealth: 100
 --- !u!65 &5412547460017521986
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -323,6 +385,12 @@ PrefabInstance:
 --- !u!4 &337614785982519173 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4359639114624637858, guid: 660d4bd578567194d9b23735e19820d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4048734376101530663}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8264930373380706278 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5376471209640739777, guid: 660d4bd578567194d9b23735e19820d2,
     type: 3}
   m_PrefabInstance: {fileID: 4048734376101530663}
   m_PrefabAsset: {fileID: 0}

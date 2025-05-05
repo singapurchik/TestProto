@@ -3,8 +3,7 @@ using System;
 
 namespace TestProto.Players
 {
-	[Serializable]
-	public class CarMover
+	public class PlayerCarMover : MonoBehaviour
 	{
 		[SerializeField] private float _forwardSpeed = 5f;
 		[SerializeField] private float _horizontalMoveSpeed = 1f;
@@ -14,9 +13,9 @@ namespace TestProto.Players
 		private float _currentX;
 		private float _targetX;
 
-		public void Move(Transform transform)
+		public void Move()
 		{
-			transform.Translate(Vector3.forward * _forwardSpeed * Time.deltaTime, Space.Self);
+			transform.Translate(Vector3.forward * (_forwardSpeed * Time.deltaTime), Space.Self);
 			_currentX = Mathf.MoveTowards(_currentX, _targetX, _horizontalMoveSpeed * Time.deltaTime);
 			var localPos = transform.localPosition;
 			localPos.x = _currentX;

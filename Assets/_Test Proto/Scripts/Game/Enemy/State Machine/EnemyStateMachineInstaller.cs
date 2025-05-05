@@ -10,6 +10,7 @@ namespace TestProto.Enemies
 		[SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 		[SerializeField] private DamageableCollider _damageableCollider;
 		[SerializeField] private EnemyStateMachine _stateMachine;
+		[SerializeField] private EnemyDamageDealer _damageDealer;
 		[SerializeField] private Death _deathState;
 		[SerializeField] private Chase _chaseState;
 		[SerializeField] private Idle _idleState;
@@ -30,6 +31,7 @@ namespace TestProto.Enemies
 		{
 			Container.BindInstance(_skinnedMeshRenderer).WhenInjectedIntoInstance(_deathState);
 			Container.BindInstance(_damageableCollider).WhenInjectedIntoInstance(_deathState);
+			Container.BindInstance(_damageDealer).WhenInjectedIntoInstance(_deathState);
 		}
 		
 		private void BindIntoEnemyState()
@@ -45,6 +47,7 @@ namespace TestProto.Enemies
 		{
 			_skinnedMeshRenderer = transform.parent.GetComponentInChildren<SkinnedMeshRenderer>(true);
 			_damageableCollider = transform.parent.GetComponentInChildren<DamageableCollider>(true);
+			_damageDealer = transform.parent.GetComponentInChildren<EnemyDamageDealer>(true);
 			_stateMachine = GetComponentInChildren<EnemyStateMachine>(true);
 			_deathState = GetComponentInChildren<Death>(true);
 			_chaseState = GetComponentInChildren<Chase>(true);

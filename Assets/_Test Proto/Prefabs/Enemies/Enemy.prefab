@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8826334645880927841}
   - component: {fileID: 1056797091882751352}
   - component: {fileID: 5419256813681613059}
+  - component: {fileID: 5780865358312333706}
   m_Layer: 0
   m_Name: State Machine
   m_TagString: Untagged
@@ -48,11 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skinnedMeshRenderer: {fileID: 0}
-  _damageableCollider: {fileID: 0}
+  _damageableCollider: {fileID: 7686996715668554699}
   _stateMachine: {fileID: 8826334645880927841}
+  _damageDealer: {fileID: 3754617153863178888}
   _deathState: {fileID: 0}
-  _chaseState: {fileID: 0}
-  _idleState: {fileID: 0}
+  _chaseState: {fileID: 5419256813681613059}
+  _idleState: {fileID: 1056797091882751352}
 --- !u!114 &8826334645880927841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +89,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fd8b0303b8f4d0d80c1f27e9eecb618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5780865358312333706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309807052573100555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984d3791cb24487894e05063de56cad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &924072909862996705
@@ -128,6 +142,7 @@ Transform:
   m_Children:
   - {fileID: 1156944045024712900}
   - {fileID: 7015423413027566843}
+  - {fileID: 9216264757956401754}
   - {fileID: 8483595541740881861}
   - {fileID: 7981810448548432394}
   m_Father: {fileID: 0}
@@ -359,6 +374,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2236440291767475134}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2969570506331540997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9216264757956401754}
+  - component: {fileID: 3754617153863178888}
+  - component: {fileID: 5893337296287950050}
+  m_Layer: 2
+  m_Name: Damage Dealer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9216264757956401754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2969570506331540997}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2236440291767475134}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3754617153863178888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2969570506331540997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e9fdde8cac4d289d03b4f7c39f6b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
+--- !u!136 &5893337296287950050
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2969570506331540997}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.8859817
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.85938495, z: 0}
 --- !u!1 &8813819587948420371
 GameObject:
   m_ObjectHideFlags: 0

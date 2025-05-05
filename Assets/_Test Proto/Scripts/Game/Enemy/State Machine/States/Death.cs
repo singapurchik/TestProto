@@ -7,11 +7,13 @@ namespace TestProto.Enemies.States
 	{
 		[Inject] private SkinnedMeshRenderer _skinnedMeshRenderer;
 		[Inject] private DamageableCollider _damageableCollider;
+		[Inject] private EnemyDamageDealer _damageDealer;
 		
 		public override void Enter()
 		{
 			_skinnedMeshRenderer.enabled = false;
 			_damageableCollider.Disable();
+			_damageDealer.Disable();
 		}
 
 		public override void Perform()
@@ -22,6 +24,7 @@ namespace TestProto.Enemies.States
 		{
 			_skinnedMeshRenderer.enabled = true;
 			_damageableCollider.Enable();
+			_damageDealer.Enable();
 			base.Exit();
 		}
 	}
