@@ -1,10 +1,10 @@
+using UnityEngine.SceneManagement;
 using System.Collections;
+using TestProto.Enemies;
 using TestProto.Players;
 using TestProto.UI;
 using UnityEngine;
 using Zenject;
-using System;
-using TestProto.Enemies;
 
 namespace TestProto
 {
@@ -19,20 +19,33 @@ namespace TestProto
 		[Inject] private PlayerInput _playerInput;
 		[Inject] private Player _player;
 
+		private const float LOSE_SCREEN_DELAY = 1f;
+		private const float WIN_SCREEN_DELAY = 3f;
+
+		private enum GameState
+		{
+			Start = 0,
+			Tutorial = 1,
+			Gameplay = 2,
+			GameOver = 3
+		}
+		
 		private GameState _currentState = GameState.Start;
 
 		private bool _isChangingState;
 
 		private void OnEnable()
 		{
-			_groundCreator.OnFinishCreatingGround += OnFinishCreatingGround;
 			_groundCreator.OnLastChunkCreated += OnLastChunkCreated;
+			_groundCreator.OnFinishCreatingGround += OnPlayerWin;
+			_player.OnDead += OnPlayerLose;
 		}
 
 		private void OnDisable()
 		{
-			_groundCreator.OnFinishCreatingGround -= OnFinishCreatingGround;
 			_groundCreator.OnLastChunkCreated -= OnLastChunkCreated;
+			_groundCreator.OnFinishCreatingGround -= OnPlayerWin;
+			_player.OnDead -= OnPlayerLose;
 		}
 
 		private void Start()
@@ -47,17 +60,31 @@ namespace TestProto
 			_enemiesSpawner.Disable();
 		}
 
-		private void OnFinishCreatingGround()
+		private void OnPlayerWin()
 		{
 			_enemiesSpawner.DespawnAllAlive();
 			_player.SetWinCondition();
+			StartCoroutine(ShowWinScreen());
+		}
+
+		private void OnPlayerLose()
+		{
+			_enemiesSpawner.DespawnAllAlive();
+			StartCoroutine(ShowLoseScreen());
 		}
 		
-		private enum GameState
+		private IEnumerator ShowLoseScreen()
 		{
-			Start = 0,
-			Tutorial = 1,
-			Gameplay = 2
+			yield return new WaitForSeconds(LOSE_SCREEN_DELAY);
+			_uiScreensSwitcher.ShowLoseScreen();
+			_currentState = GameState.GameOver;
+		}
+		
+		private IEnumerator ShowWinScreen()
+		{
+			yield return new WaitForSeconds(WIN_SCREEN_DELAY);
+			_uiScreensSwitcher.ShowWinScreen();
+			_currentState = GameState.GameOver;
 		}
 
 		private IEnumerator ShowTutorial()
@@ -80,20 +107,23 @@ namespace TestProto
 		
 		private void Update()
 		{
-			switch (_currentState)
+			if (!_isChangingState)
 			{
-				case GameState.Start:
-					if (!_isChangingState && Input.GetMouseButtonUp(0))
+				if (_currentState == GameState.Start)
+				{
+					if (Input.GetMouseButtonUp(0))
 						StartCoroutine(ShowTutorial());
-					break;
-				case GameState.Tutorial:
+				}
+				else if (_currentState == GameState.Tutorial)
+				{
 					if (_playerInput.IsHorizontalInputProcess)
 						StartGame();
-					break;
-				case GameState.Gameplay:
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
+				}
+				else if (_currentState == GameState.GameOver)
+				{
+					if (Input.GetMouseButtonUp(0))
+						SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+				}
 			}
 		}
 	}

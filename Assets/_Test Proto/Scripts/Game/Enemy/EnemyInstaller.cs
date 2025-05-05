@@ -8,6 +8,7 @@ namespace TestProto.Enemies
 	{
 		[SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 		[SerializeField] private DamageableCollider _damageableCollider;
+		[SerializeField] private EnemyVisualEffects _visualEffects;
 		[SerializeField] private EnemyStateMachine _stateMachine;
 		[SerializeField] private EnemyTargetFinder _targetFinder;
 		[SerializeField] private EnemyDamageDealer _damageDealer;
@@ -21,6 +22,7 @@ namespace TestProto.Enemies
 		public override void InstallBindings()
 		{
 			BindFromInstance();
+			BindIntoAnimator();
 			BindIntoEnemy();
 			BindInstance();
 		}
@@ -42,10 +44,15 @@ namespace TestProto.Enemies
 			Container.BindInstance(_health).WhenInjectedIntoInstance(_enemy);
 		}
 
-		private void BindInstance()
+		private void BindIntoAnimator()
 		{
 			Container.BindInstance(_skinnedMeshRenderer).WhenInjectedIntoInstance(_enemyAnimator);
 			Container.BindInstance(_animator).WhenInjectedIntoInstance(_enemyAnimator);
+		}
+
+		private void BindInstance()
+		{
+			Container.BindInstance(_visualEffects).AsSingle();
 			Container.BindInstance(_enemyAnimator).AsSingle();
 			Container.BindInstance(_rotator).AsSingle();
 			Container.BindInstance(_mover).AsSingle();
@@ -57,6 +64,7 @@ namespace TestProto.Enemies
 		{
 			_skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>(true);
 			_damageableCollider = GetComponentInChildren<DamageableCollider>(true);
+			_visualEffects = GetComponentInChildren<EnemyVisualEffects>(true);
 			_damageDealer = GetComponentInChildren<EnemyDamageDealer>(true);
 			_stateMachine = GetComponentInChildren<EnemyStateMachine>(true);
 			_targetFinder = GetComponentInChildren<EnemyTargetFinder>(true);

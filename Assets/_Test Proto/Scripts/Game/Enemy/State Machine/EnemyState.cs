@@ -5,6 +5,7 @@ namespace TestProto.Enemies.States
 	 public abstract class EnemyState : State
 	 { 
 		[Inject] protected IReadOnlyTargetFinder TargetFinder;
+		[Inject] protected EnemyVisualEffects VisualEffects;
 		[Inject] protected IReadOnlyHealth Health;
 		[Inject] protected EnemyAnimator Animator;
 		[Inject] protected EnemyRotator Rotator;
@@ -25,6 +26,7 @@ namespace TestProto.Enemies.States
 		
 		protected virtual void OnTakeDamage()
 		{
+			VisualEffects.PlayTakeDamageEffect();
 			Animator.PlayTakeDamageAnim();
 		}
 	 }

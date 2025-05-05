@@ -1,5 +1,6 @@
 using UnityEngine;
 using Zenject;
+using System;
 
 namespace TestProto.Players
 {
@@ -9,12 +10,25 @@ namespace TestProto.Players
 		[Inject] private PlayerCar _car;
 
 		private bool _isInitialized;
-		
-		public void Initialize() => _isInitialized = true;
 
+		public event Action OnDead;
+
+		private void OnEnable() => _car.OnDestroyed += OnCarDestroyed;
+		
+		private void OnDisable() => _car.OnDestroyed -= OnCarDestroyed;
+
+		public void Initialize() => _isInitialized = true;
+		
 		public void SetWinCondition()
 		{
 			_isInitialized = false;
+		}
+		
+		private void OnCarDestroyed()
+		{
+			_turret.HideLaser();
+			_isInitialized = false;
+			OnDead?.Invoke();
 		}
 
 		private void Update()

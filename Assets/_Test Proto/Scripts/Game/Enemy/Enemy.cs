@@ -8,6 +8,7 @@ namespace TestProto.Enemies
 	{
 		[Inject] private SkinnedMeshRenderer _skinnedMeshRenderer;
 		[Inject] private DamageableCollider _damageableCollider;
+		[Inject] private EnemyVisualEffects _visualEffects;
 		[Inject] private EnemyDamageDealer _damageDealer;
 		[Inject] private EnemyStateMachine _stateMachine;
 		[Inject] private EnemyTargetFinder _targetFinder;
@@ -38,6 +39,7 @@ namespace TestProto.Enemies
 		private void OnZeroHealth()
 		{
 			_skinnedMeshRenderer.enabled = false;
+			_visualEffects.PlayDeathEffect();
 			_damageableCollider.Disable();
 			_damageDealer.Disable();
 			_targetFinder.Disable();

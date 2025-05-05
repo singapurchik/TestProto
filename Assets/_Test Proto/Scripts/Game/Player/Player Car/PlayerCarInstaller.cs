@@ -10,11 +10,12 @@ namespace TestProto.Players
 		[SerializeField] private PlayerCarMover _mover;
 		[SerializeField] private PlayerCar _car;
 		[SerializeField] private Health _health;
-		[SerializeField] private Renderer[] _animatedRenderers;
+		[SerializeField] private Renderer[] _allCarRenderers;
 
 		public override void InstallBindings()
 		{
-			Container.BindInstance(_animatedRenderers).WhenInjectedIntoInstance(_carAnimator);
+			Container.BindInstance(_allCarRenderers).WhenInjectedIntoInstance(_carAnimator);
+			Container.BindInstance(_allCarRenderers).WhenInjectedIntoInstance(_car);
 			Container.BindInstance(_carAnimator).WhenInjectedIntoInstance(_car);
 			Container.BindInstance(_health).WhenInjectedIntoInstance(_car);
 			Container.BindInstance(_mover).WhenInjectedIntoInstance(_car);

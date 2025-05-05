@@ -7,6 +7,7 @@ namespace TestProto.Players
 	{
 		[SerializeField] private TurretAttacker _attacker;
 		[SerializeField] private TurretRotator _rotator;
+		[SerializeField] private GameObject _laser;
 		
 		[Inject] private IReadOnlyPlayerInput _input;
 
@@ -22,6 +23,8 @@ namespace TestProto.Players
 		public void RequestAttack() => _isAttackRequested = true;
 
 		public void RequestRotate() => _isRotateRequested = true;
+		
+		public void HideLaser() => _laser.SetActive(false);
 
 		private void Rotate()
 		{
