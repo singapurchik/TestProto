@@ -6,6 +6,8 @@ namespace TestProto.Enemies
 {
 	public class Enemy : MonoBehaviour
 	{
+		[SerializeField] private GameObject _fakeShadow;
+		
 		[Inject] private SkinnedMeshRenderer _skinnedMeshRenderer;
 		[Inject] private DamageableCollider _damageableCollider;
 		[Inject] private EnemyVisualEffects _visualEffects;
@@ -30,6 +32,7 @@ namespace TestProto.Enemies
 		{
 			_health.TryHeal(float.MaxValue);
 			_skinnedMeshRenderer.enabled = true;
+			_fakeShadow.SetActive(true);
 			_damageableCollider.Enable();
 			_damageDealer.Enable();
 			_targetFinder.Enable();
@@ -39,6 +42,7 @@ namespace TestProto.Enemies
 		private void OnZeroHealth()
 		{
 			_skinnedMeshRenderer.enabled = false;
+			_fakeShadow.SetActive(false);
 			_visualEffects.PlayDeathEffect();
 			_damageableCollider.Disable();
 			_damageDealer.Disable();
