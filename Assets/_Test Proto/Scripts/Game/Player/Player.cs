@@ -54,6 +54,7 @@ namespace TestProto.Players
 		
 		public void SetWinCondition()
 		{
+			_visualEffects.PlayFireworkEffect();
 			_isInitialized = false;
 		}
 		private void Update()

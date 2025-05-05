@@ -3,6 +3,7 @@ namespace TestProto
 	public enum CameraType
 	{
 		StartCamera,
-		FollowCamera
+		FollowCamera,
+		WinCamera
 	}
 }

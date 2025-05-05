@@ -64,6 +64,7 @@ namespace TestProto
 		{
 			_enemiesSpawner.DespawnAllAlive();
 			_player.SetWinCondition();
+			_camerasSwitcher.SwitchToWinCamera();
 			StartCoroutine(ShowWinScreen());
 		}
 
