@@ -27,6 +27,7 @@ namespace TestProto.Enemies
 		{
 			Container.Bind<IReadOnlyHealth>().FromInstance(_health).AsSingle();
 			Container.Bind<IDamageable>().FromInstance(_health).AsSingle();
+			Container.Bind<IEnemyEvents>().FromInstance(_enemy).AsSingle();
 		}
 		
 		private void BindIntoEnemy()

@@ -47,7 +47,7 @@ namespace TestProto
 			return obj;
 		}
 
-		protected virtual void ReturnToPool(T obj)
+		public virtual void ReturnToPool(T obj)
 		{
 			obj.gameObject.SetActive(false);
 			_pool.Enqueue(obj);

@@ -20,5 +20,7 @@ namespace TestProto.Enemies
 				OnTargetFound?.Invoke();
 			}
 		}
+		
+		public void LoseTarget() => CurrentTarget = null;
 	}
 }

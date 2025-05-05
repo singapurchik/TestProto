@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace TestProto.Enemies.States
 {
 	public class Idle : EnemyState

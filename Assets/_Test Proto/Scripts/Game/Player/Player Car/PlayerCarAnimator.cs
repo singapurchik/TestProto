@@ -1,7 +1,7 @@
 using TestProto.Enemies;
 using UnityEngine;
-using Zenject;
 using DG.Tweening;
+using Zenject;
 
 namespace TestProto.Players
 {
@@ -9,12 +9,15 @@ namespace TestProto.Players
 	{
 		[SerializeField] private float _takeDamageAnimDuration = 0.1f;
 		[SerializeField] private Color _takeDamageColor = Color.white;
-		[SerializeField] private Vector3 _punchScale = new Vector3(0.15f, 0f, 0.15f); // punch по XZ
+		[SerializeField] private Vector3 _takeDamageScale = new (0.15f, 0f, 0.15f);
 
 		[Inject] private Renderer[] _renderers;
 
 		private TakeDamageAnim _takeDamageAnim;
 		private Tween _currentTakeDamageTween;
+
+		private const float TAKE_DAMAGE_ELASTICITY = 0.5f;
+		private const int TAKE_DAMAGE_VIBRATO = 1;
 
 		private void Awake()
 		{
@@ -29,7 +32,8 @@ namespace TestProto.Players
 			transform.localScale = Vector3.one;
 			
 			_currentTakeDamageTween =
-				transform.DOPunchScale(_punchScale, _takeDamageAnimDuration, vibrato: 1, elasticity: 0.5f);
+				transform.DOPunchScale(
+					_takeDamageScale, _takeDamageAnimDuration, TAKE_DAMAGE_VIBRATO, TAKE_DAMAGE_ELASTICITY);
 		}
 	}
 }

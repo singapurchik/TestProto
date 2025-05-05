@@ -18,7 +18,6 @@ namespace TestProto.Enemies
 		public override void InstallBindings()
 		{
 			BindIntoStateMachine();
-			BindIntoDeathState();
 			BindIntoEnemyState();
 		}
 
@@ -26,16 +25,12 @@ namespace TestProto.Enemies
 		{
 			Container.BindInstance(_idleState).WhenInjectedIntoInstance(_stateMachine);
 		}
-
-		private void BindIntoDeathState()
-		{
-			Container.BindInstance(_skinnedMeshRenderer).WhenInjectedIntoInstance(_deathState);
-			Container.BindInstance(_damageableCollider).WhenInjectedIntoInstance(_deathState);
-			Container.BindInstance(_damageDealer).WhenInjectedIntoInstance(_deathState);
-		}
 		
 		private void BindIntoEnemyState()
 		{
+			Container.BindInstance(_skinnedMeshRenderer).WhenInjectedInto<EnemyState>();
+			Container.BindInstance(_damageableCollider).WhenInjectedInto<EnemyState>();
+			Container.BindInstance(_damageDealer).WhenInjectedInto<EnemyState>();
 			Container.BindInstance(_deathState).WhenInjectedInto<EnemyState>();
 			Container.BindInstance(_chaseState).WhenInjectedInto<EnemyState>();
 			Container.BindInstance(_idleState).WhenInjectedInto<EnemyState>();
