@@ -1,12 +1,13 @@
 using UnityEngine;
 using Zenject;
-using System;
 
 namespace TestProto.Players
 {
 	[RequireComponent(typeof(BoxCollider))]
 	public class PlayerCar : MonoBehaviour, IReadOnlyPlayerCar
 	{
+		[SerializeField] private GameObject _wheelsTrails;
+		
 		[Inject] private PlayerCarAnimator _animator;
 		[Inject] private IReadOnlyHealth _health;
 		[Inject] private PlayerCarMover _mover;
@@ -23,6 +24,8 @@ namespace TestProto.Players
 
 		private void OnDisable() => _health.OnTakeDamage -= OnTakeDamage;
 
+		public void DisableWheelsTrails() => _wheelsTrails.SetActive(false);
+		
 		public void DisableCollider() => _collider.enabled = false;
 		
 		public void RequestMove() => _isMoveRequested = true;

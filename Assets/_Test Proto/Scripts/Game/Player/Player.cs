@@ -40,6 +40,7 @@ namespace TestProto.Players
 		{
 			_visualEffects.PlayCarDestroyEffect();
 			_cameraShaker.PlayDestroyCarEffect();
+			_car.DisableWheelsTrails();
 			_car.DisableCollider();
 			_turret.HideLaser();
 			
