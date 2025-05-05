@@ -4,11 +4,14 @@ namespace TestProto.Players
 {
 	public class PlayerInput : MonoBehaviour, IReadOnlyPlayerInput
 	{
+		private Vector2 _lastPointerPosition;
+		
+		private const float READ_HORIZONTAL_INPUT_STEP = 0.01f;
+		
 		public float HorizontalInput { get; private set; }
 
+		public bool IsHorizontalInputProcess => Mathf.Abs(HorizontalInput) > READ_HORIZONTAL_INPUT_STEP;
 		public bool IsActive { get; private set; } = true;
-
-		private Vector2 _lastPointerPosition;
 
 		public void Disable() => IsActive = false;
 		

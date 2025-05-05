@@ -4,6 +4,7 @@ namespace TestProto.Players
 	{
 		public float HorizontalInput { get; }
 		
+		public bool IsHorizontalInputProcess { get; }
 		public bool IsActive { get; }
 	}
 }

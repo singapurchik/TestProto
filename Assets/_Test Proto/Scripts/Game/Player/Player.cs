@@ -8,11 +8,18 @@ namespace TestProto.Players
 		[Inject] private PlayerTurret _turret;
 		[Inject] private PlayerCar _car;
 
+		private bool _isInitialized;
+		
+		public void Initialize() => _isInitialized = true;
+
 		private void Update()
 		{
-			_turret.RequestAttack();
-			_turret.RequestRotate();
-			_car.RequestMove();
+			if (_isInitialized)
+			{
+				_turret.RequestAttack();
+				_turret.RequestRotate();
+				_car.RequestMove();	
+			}
 		}
 	}
 }

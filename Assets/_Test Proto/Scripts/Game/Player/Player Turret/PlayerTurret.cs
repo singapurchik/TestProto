@@ -13,7 +13,6 @@ namespace TestProto.Players
 		private bool _isRotateRequested;
 		private bool _isAttackRequested;
 		
-		private const float MIN_INPUT_STEP_TO_ROTATE = 0.01f;
 
 		[Inject]
 		private void Construct(DiContainer container) => container.Inject(_attacker);
@@ -26,7 +25,7 @@ namespace TestProto.Players
 
 		private void Rotate()
 		{
-			if (Mathf.Abs(_input.HorizontalInput) > MIN_INPUT_STEP_TO_ROTATE)
+			if (_input.IsHorizontalInputProcess)
 				_rotator.Rotate(transform, _input.HorizontalInput);
 		}
 
