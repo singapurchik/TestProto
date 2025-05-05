@@ -4,13 +4,18 @@ using TestProto.UI;
 using UnityEngine;
 using Zenject;
 using System;
+using TestProto.Enemies;
 
 namespace TestProto
 {
 	public class Game : MonoBehaviour
 	{
+		[SerializeField] private int _roadLength = 5;
+		
 		[Inject] private UIScreensSwitcher _uiScreensSwitcher;
 		[Inject] private CamerasSwitcher _camerasSwitcher;
+		[Inject] private EnemiesSpawner _enemiesSpawner;
+		[Inject] private GroundCreator _groundCreator;
 		[Inject] private PlayerInput _playerInput;
 		[Inject] private Player _player;
 
@@ -18,11 +23,36 @@ namespace TestProto
 
 		private bool _isChangingState;
 
+		private void OnEnable()
+		{
+			_groundCreator.OnFinishCreatingGround += OnFinishCreatingGround;
+			_groundCreator.OnLastChunkCreated += OnLastChunkCreated;
+		}
+
+		private void OnDisable()
+		{
+			_groundCreator.OnFinishCreatingGround -= OnFinishCreatingGround;
+			_groundCreator.OnLastChunkCreated -= OnLastChunkCreated;
+		}
+
 		private void Start()
 		{
 			_uiScreensSwitcher.ShowStartScreen();
+			_groundCreator.Initialize(_roadLength);
+			_enemiesSpawner.Enable();
 		}
 
+		private void OnLastChunkCreated()
+		{
+			_enemiesSpawner.Disable();
+		}
+
+		private void OnFinishCreatingGround()
+		{
+			_enemiesSpawner.DespawnAllAlive();
+			_player.SetWinCondition();
+		}
+		
 		private enum GameState
 		{
 			Start = 0,

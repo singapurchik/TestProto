@@ -39,6 +39,8 @@ namespace TestProto
 		{
 			Container.BindInstance(_uiScreensSwitcher).WhenInjectedIntoInstance(_game);
 			Container.BindInstance(_camerasSwitcher).WhenInjectedIntoInstance(_game);
+			Container.BindInstance(_enemiesSpawner).WhenInjectedIntoInstance(_game);
+			Container.BindInstance(_groundCreator).WhenInjectedIntoInstance(_game);
 			Container.BindInstance(_playerInput).WhenInjectedIntoInstance(_game);
 			Container.BindInstance(_player).WhenInjectedIntoInstance(_game);
 		}

@@ -21,32 +21,47 @@ namespace TestProto.Enemies
 
         private float _nextCheckTime;
 
+        private bool _isActive;
+
+        private const float DESPAWN_OFFSET = 5f;
+        
+        public void Disable() => _isActive = false;
+        
+        public void Enable() => _isActive = true;
+
+        public void DespawnAllAlive()
+        {
+	        foreach (var enemy in _alive.ToArray())
+		        enemy.Kill();
+        }
+
         private void TryDespawn()
         {
             for (int i = _alive.Count - 1; i >= 0; i--)
-	            if (_alive[i].transform.position.z < _car.Position.z - 5f)
+	            if (_alive[i].transform.position.z < _car.Position.z - DESPAWN_OFFSET)
 		            _alive[i].Kill();
         }
 
         private void TrySpawn()
         {
-	        var candidatePos = GetRandomAheadPosition();
-	        
-	        while (_alive.Count < _maxAlive)
-            {
-	            if (IsFarEnoughFromOthers(candidatePos))
-                {
-                    var enemy = _pool.Get();
-                    enemy.transform.position = candidatePos;
-                    enemy.OnDead += RemoveFromList;
-                    _alive.Add(enemy);
-                }
-                else
-                {
-                    break;
-                }
-            }
+	        const int maxAttempts = 10;
+	        int attempts = 0;
+
+	        while (_alive.Count < _maxAlive && attempts < maxAttempts)
+	        {
+		        var candidatePos = GetRandomAheadPosition();
+		        attempts++;
+
+		        if (IsFarEnoughFromOthers(candidatePos))
+		        {
+			        var enemy = _pool.Get();
+			        enemy.transform.position = candidatePos;
+			        enemy.OnDead += RemoveFromList;
+			        _alive.Add(enemy);
+		        }
+	        }
         }
+
 
         private Vector3 GetRandomAheadPosition()
         {
@@ -72,7 +87,7 @@ namespace TestProto.Enemies
         
         private void Update()
         {
-	        if (Time.timeSinceLevelLoad > _nextCheckTime)
+	        if (_isActive && Time.timeSinceLevelLoad > _nextCheckTime)
 	        {
 		        TryDespawn();
 		        TrySpawn();

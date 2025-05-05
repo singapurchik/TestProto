@@ -12,6 +12,11 @@ namespace TestProto.Players
 		
 		public void Initialize() => _isInitialized = true;
 
+		public void SetWinCondition()
+		{
+			_isInitialized = false;
+		}
+
 		private void Update()
 		{
 			if (_isInitialized)

@@ -7,8 +7,10 @@ namespace TestProto.Enemies
 	public class EnemyInstaller : MonoInstaller
 	{
 		[SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
+		[SerializeField] private DamageableCollider _damageableCollider;
 		[SerializeField] private EnemyStateMachine _stateMachine;
 		[SerializeField] private EnemyTargetFinder _targetFinder;
+		[SerializeField] private EnemyDamageDealer _damageDealer;
 		[SerializeField] private EnemyAnimator _enemyAnimator;
 		[SerializeField] private EnemyRotator _rotator;
 		[SerializeField] private Animator _animator;
@@ -25,14 +27,18 @@ namespace TestProto.Enemies
 		
 		private void BindFromInstance()
 		{
+			Container.Bind<IReadOnlyTargetFinder>().FromInstance(_targetFinder).AsSingle();
 			Container.Bind<IReadOnlyHealth>().FromInstance(_health).AsSingle();
 			Container.Bind<IDamageable>().FromInstance(_health).AsSingle();
-			Container.Bind<IEnemyEvents>().FromInstance(_enemy).AsSingle();
 		}
 		
 		private void BindIntoEnemy()
 		{
+			Container.BindInstance(_skinnedMeshRenderer).WhenInjectedIntoInstance(_enemy);
+			Container.BindInstance(_damageableCollider).WhenInjectedIntoInstance(_enemy);
+			Container.BindInstance(_targetFinder).WhenInjectedIntoInstance(_enemy);
 			Container.BindInstance(_stateMachine).WhenInjectedIntoInstance(_enemy);
+			Container.BindInstance(_damageDealer).WhenInjectedIntoInstance(_enemy);
 			Container.BindInstance(_health).WhenInjectedIntoInstance(_enemy);
 		}
 
@@ -41,7 +47,6 @@ namespace TestProto.Enemies
 			Container.BindInstance(_skinnedMeshRenderer).WhenInjectedIntoInstance(_enemyAnimator);
 			Container.BindInstance(_animator).WhenInjectedIntoInstance(_enemyAnimator);
 			Container.BindInstance(_enemyAnimator).AsSingle();
-			Container.BindInstance(_targetFinder).AsSingle();
 			Container.BindInstance(_rotator).AsSingle();
 			Container.BindInstance(_mover).AsSingle();
 		}
@@ -51,6 +56,8 @@ namespace TestProto.Enemies
 		private void FindDependencies()
 		{
 			_skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>(true);
+			_damageableCollider = GetComponentInChildren<DamageableCollider>(true);
+			_damageDealer = GetComponentInChildren<EnemyDamageDealer>(true);
 			_stateMachine = GetComponentInChildren<EnemyStateMachine>(true);
 			_targetFinder = GetComponentInChildren<EnemyTargetFinder>(true);
 			_enemyAnimator = GetComponentInChildren<EnemyAnimator>(true);

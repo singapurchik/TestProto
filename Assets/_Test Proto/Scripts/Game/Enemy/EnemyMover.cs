@@ -26,6 +26,12 @@ namespace TestProto.Enemies
 			_currentSpeed = Mathf.MoveTowards(
 				_currentSpeed, _moveSpeed, _speedChangeRate * Time.deltaTime);
 		}
+		
+		private void DecreaseSpeed()
+		{
+			_currentSpeed = Mathf.MoveTowards(
+				_currentSpeed, 0, _speedChangeRate * Time.deltaTime);
+		}
 
 		private void MoveToTarget()
 		{
@@ -42,6 +48,10 @@ namespace TestProto.Enemies
 
 				MoveToTarget();
 				_isMoveToTargetRequested = false;
+			}
+			else if (_currentSpeed > 0)
+			{
+				DecreaseSpeed();
 			}
 		}
 	}
