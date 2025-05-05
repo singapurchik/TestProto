@@ -5178,7 +5178,7 @@ MonoBehaviour:
   _spawnZOffsetMax: 100
   _xRange: {x: -8, y: 8}
   _maxAlive: 20
-  _minSpacing: 1
+  _minSpacing: 2
   _checkInterval: 0.1
 --- !u!4 &1571594134
 Transform:
@@ -6663,7 +6663,7 @@ PrefabInstance:
     - target: {fileID: 2324195751097414782, guid: 339d2e91caa76b6499bfb74827c3fcf1,
         type: 3}
       propertyPath: _delay
-      value: 0.1
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 4169980798141222128, guid: 339d2e91caa76b6499bfb74827c3fcf1,
         type: 3}
