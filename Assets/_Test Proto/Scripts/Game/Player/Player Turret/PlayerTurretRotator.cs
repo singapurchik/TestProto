@@ -3,8 +3,7 @@ using System;
 
 namespace TestProto.Players
 {
-	[Serializable]
-	public class TurretRotator
+	public class PlayerTurretRotator : MonoBehaviour
 	{
 		[SerializeField] private float _rotationSpeed = 0.2f;
 		[SerializeField] private float _minZ = -40f;
@@ -21,7 +20,7 @@ namespace TestProto.Players
 				_currentAngleZ -= 360f;
 		}
 		
-		public void Rotate(Transform transform, float delta)
+		public void Rotate(float delta)
 		{
 			var direction = _isInverted ? 1f : -1f;
 			_currentAngleZ = Mathf.Clamp(_currentAngleZ + delta * _rotationSpeed * direction, _minZ, _maxZ);

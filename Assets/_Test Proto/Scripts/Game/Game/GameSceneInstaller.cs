@@ -35,7 +35,7 @@ namespace TestProto
 		{
 			Container.BindInstance(_groundChunksPool).WhenInjectedIntoInstance(_groundCreator);
 			Container.BindInstance(_enemiesPool).WhenInjectedIntoInstance(_enemiesSpawner);
-			Container.BindInstance(_projectilePool).WhenInjectedInto<TurretAttacker>();
+			Container.BindInstance(_projectilePool).WhenInjectedInto<PlayerTurretAttacker>();
 		}
 		private void BindGame()
 		{

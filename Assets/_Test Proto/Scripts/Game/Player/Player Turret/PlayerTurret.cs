@@ -5,16 +5,15 @@ namespace TestProto.Players
 {
 	public class PlayerTurret : MonoBehaviour
 	{
-		[SerializeField] private TurretAttacker _attacker;
-		[SerializeField] private TurretRotator _rotator;
 		[SerializeField] private GameObject _laser;
 		
+		[Inject] private PlayerTurretAttacker _attacker;
+		[Inject] private PlayerTurretRotator _rotator;
 		[Inject] private IReadOnlyPlayerInput _input;
 
 		private bool _isRotateRequested;
 		private bool _isAttackRequested;
 		
-
 		[Inject]
 		private void Construct(DiContainer container) => container.Inject(_attacker);
 		
@@ -29,7 +28,7 @@ namespace TestProto.Players
 		private void Rotate()
 		{
 			if (_input.IsHorizontalInputProcess)
-				_rotator.Rotate(transform, _input.HorizontalInput);
+				_rotator.Rotate(_input.HorizontalInput);
 		}
 
 		private void Update()

@@ -1,35 +1,63 @@
 using UnityEngine;
-using System;
+using Zenject;
 
 namespace TestProto.Players
 {
 	public class PlayerCarMover : MonoBehaviour
 	{
 		[SerializeField] private float _forwardSpeed = 5f;
-		[SerializeField] private float _horizontalMoveSpeed = 1f;
+		[SerializeField] private float _maxHorizontalSpeed = 2f;
+		[SerializeField] private float _acceleration = 4f;
 		[SerializeField] private float _maxHorizontalOffset = 4f;
-		[SerializeField] private float _minHorizontalOffsetDelta = 0.5f;
+		[SerializeField] private float _minOffsetDelta = 0.5f;
 
+		[Inject] private PlayerCarRotator _rotator;
+		
 		private float _currentX;
 		private float _targetX;
+		private float _velocityX;
 
 		public void Move()
 		{
-			transform.Translate(Vector3.forward * (_forwardSpeed * Time.deltaTime), Space.Self);
-			_currentX = Mathf.MoveTowards(_currentX, _targetX, _horizontalMoveSpeed * Time.deltaTime);
-			var localPos = transform.localPosition;
-			localPos.x = _currentX;
-			transform.localPosition = localPos;
+			MoveForward();
+			UpdateHorizontalPosition();
+			UpdateRotation();
+			CheckForNewTarget();
+		}
 
-			if (Mathf.Abs(_currentX - _targetX) < 0.1f)
+		private void MoveForward()
+		{
+			transform.Translate(Vector3.forward * (_forwardSpeed * Time.deltaTime), Space.Self);
+		}
+
+		private void UpdateHorizontalPosition()
+		{
+			float direction = Mathf.Sign(_targetX - _currentX);
+			float desiredSpeed = direction * _maxHorizontalSpeed;
+			_velocityX = Mathf.MoveTowards(_velocityX, desiredSpeed, _acceleration * Time.deltaTime);
+			_currentX += _velocityX * Time.deltaTime;
+
+			var pos = transform.localPosition;
+			pos.x = _currentX;
+			transform.localPosition = pos;
+		}
+
+		private void UpdateRotation()
+		{
+			_rotator.UpdateRotation(_velocityX, _maxHorizontalSpeed);
+		}
+
+		private void CheckForNewTarget()
+		{
+			if (Mathf.Abs(_targetX - _currentX) < 0.05f)
 				_targetX = GetNextOffset(_targetX);
 		}
 
 		private float GetNextOffset(float previous)
 		{
 			float next;
-			do next = UnityEngine.Random.Range(-_maxHorizontalOffset, _maxHorizontalOffset);
-			while (Mathf.Abs(next - previous) < _minHorizontalOffsetDelta);
+			do next = Random.Range(-_maxHorizontalOffset, _maxHorizontalOffset);
+			while (Mathf.Abs(next - previous) < _minOffsetDelta);
 			return next;
 		}
 	}

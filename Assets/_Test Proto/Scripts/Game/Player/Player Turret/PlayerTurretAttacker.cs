@@ -1,18 +1,18 @@
-using System;
 using TestProto.Projectiles;
 using UnityEngine;
 using Zenject;
 
 namespace TestProto.Players
 {
-	[Serializable]
-	public class TurretAttacker
+	public class PlayerTurretAttacker : MonoBehaviour
 	{
 		[SerializeField] private ParticleSystem _attackEffect;
 		[SerializeField] private Transform _projectileSpawnPoint;
 		[SerializeField] private float _damage = 50f;
 		[SerializeField] private float _delay = 1f;
 
+		[Inject] private PlayerTurretAnimator _animator;
+		[Inject] private CameraShaker _shaker;
 		[Inject] private ProjectilePool _pool;
 
 		private float _nextAttackTime;
@@ -25,6 +25,8 @@ namespace TestProto.Players
 
 		private void Attack()
 		{
+			_shaker.PlayTurretAttackEffect();
+			_animator.PlayAttackAim();
 			_attackEffect.Play();
 
 			var bullet = _pool.Get();
