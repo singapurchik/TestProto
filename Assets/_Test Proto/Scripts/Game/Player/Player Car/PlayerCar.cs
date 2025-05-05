@@ -4,11 +4,21 @@ namespace TestProto.Players
 {
 	public class PlayerCar : MonoBehaviour, IReadOnlyPlayerCar
 	{
-		[SerializeField] private Transform _car;
 		[SerializeField] private CarMover _mover;
 
-		public Vector3 CarPosition => _car.position;
+		private bool _isMoveRequested;
 		
-		public void Move() => _mover.Move(_car);
+		public Vector3 Position => transform.position;
+
+		public void RequestMove() => _isMoveRequested = true;
+
+		private void Update()
+		{
+			if (_isMoveRequested)
+			{
+				_mover.Move(transform);
+				_isMoveRequested = false;
+			}
+		}
 	}
 }

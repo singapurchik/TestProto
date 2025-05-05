@@ -4,6 +4,6 @@ namespace TestProto.Players
 {
 	public interface IReadOnlyPlayerCar
 	{
-		public Vector3 CarPosition { get; }
+		public Vector3 Position { get; }
 	}
 }

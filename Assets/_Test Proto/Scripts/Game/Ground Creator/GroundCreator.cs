@@ -14,6 +14,10 @@ namespace TestProto
 		private GroundChunk _currentChunk;
 		private GroundChunk _lastChunk;
 
+		private float _nextUpdateTime;
+		
+		private const float UPDATE_INTERVAL = 0.25f;
+		
 		private void Start()
 		{
 			_currentChunk = _pool.Get();
@@ -22,21 +26,26 @@ namespace TestProto
 
 		private void Update()
 		{
-			var spawnChunkPosition = Mathf.Lerp(
-				_currentChunk.StartPoint.position.z,
-				_currentChunk.EndPoint.position.z,
-				_chunkSwitchThresholdNormalized);
-			
-			if (_car.CarPosition.z > spawnChunkPosition)
+			if (Time.timeSinceLevelLoad > _nextUpdateTime)
 			{
-				var newChunk = _pool.Get();
-				newChunk.transform.position += _currentChunk.EndPoint.position - newChunk.StartPoint.position;
+				var nextChunkSpawnPosition = Mathf.Lerp(
+					_currentChunk.StartPoint.position.z,
+					_currentChunk.EndPoint.position.z,
+					_chunkSwitchThresholdNormalized);
+			
+				if (_car.Position.z > nextChunkSpawnPosition)
+				{
+					var newChunk = _pool.Get();
+					newChunk.transform.position += _currentChunk.EndPoint.position - newChunk.StartPoint.position;
 				
-				if (_lastChunk != null)
-					_lastChunk.ReturnToPool();
+					if (_lastChunk != null)
+						_lastChunk.ReturnToPool();
 				
-				_lastChunk = _currentChunk;
-				_currentChunk = newChunk;
+					_lastChunk = _currentChunk;
+					_currentChunk = newChunk;
+				}
+				
+				_nextUpdateTime = Time.timeSinceLevelLoad + UPDATE_INTERVAL;
 			}
 		}
 	}

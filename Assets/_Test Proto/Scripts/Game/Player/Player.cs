@@ -10,9 +10,9 @@ namespace TestProto.Players
 
 		private void Update()
 		{
-			_turret.TryAttack();
-			_turret.Rotate();
-			_car.Move();
+			_turret.RequestAttack();
+			_turret.RequestRotate();
+			_car.RequestMove();
 		}
 	}
 }
