@@ -32,12 +32,13 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-23cedaac9448e204689ebec4894a40f0-1571594132-0
         - globalObjectIdString: GlobalObjectId_V1-2-23cedaac9448e204689ebec4894a40f0-1408118342-0
         - globalObjectIdString: GlobalObjectId_V1-2-23cedaac9448e204689ebec4894a40f0-1458548003-0
+        - globalObjectIdString: GlobalObjectId_V1-2-23cedaac9448e204689ebec4894a40f0-819981728-0
         values:
         - colorIndex: 1
           iconNameOrGuid: 
           isIconRecursive: 0
           isColorRecursive: 0
-        - colorIndex: 9
+        - colorIndex: 8
           iconNameOrGuid: 
           isIconRecursive: 0
           isColorRecursive: 0
@@ -86,6 +87,10 @@ MonoBehaviour:
           isIconRecursive: 0
           isColorRecursive: 0
         - colorIndex: 3
+          iconNameOrGuid: 
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 8
           iconNameOrGuid: 
           isIconRecursive: 0
           isColorRecursive: 0

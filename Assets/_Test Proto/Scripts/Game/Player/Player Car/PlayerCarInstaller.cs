@@ -9,15 +9,10 @@ namespace TestProto.Players
 		[SerializeField] private PlayerCarAnimator _carAnimator;
 		[SerializeField] private PlayerCarMover _mover;
 		[SerializeField] private PlayerCar _car;
-		[SerializeField] private Health _health;
-		[SerializeField] private Renderer[] _allCarRenderers;
 
 		public override void InstallBindings()
 		{
-			Container.BindInstance(_allCarRenderers).WhenInjectedIntoInstance(_carAnimator);
-			Container.BindInstance(_allCarRenderers).WhenInjectedIntoInstance(_car);
 			Container.BindInstance(_carAnimator).WhenInjectedIntoInstance(_car);
-			Container.BindInstance(_health).WhenInjectedIntoInstance(_car);
 			Container.BindInstance(_mover).WhenInjectedIntoInstance(_car);
 		}
 
@@ -27,7 +22,6 @@ namespace TestProto.Players
 		{
 			_carAnimator = GetComponentInChildren<PlayerCarAnimator>(true);
 			_mover = GetComponentInChildren<PlayerCarMover>(true);
-			_health = GetComponentInChildren<Health>(true);
 			_car = GetComponentInChildren<PlayerCar>(true);
 		}
 #endif

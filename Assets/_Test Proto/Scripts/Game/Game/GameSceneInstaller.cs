@@ -16,6 +16,7 @@ namespace TestProto
 		[SerializeField] private ProjectilePool _projectilePool;
 		[SerializeField] private EnemiesSpawner _enemiesSpawner;
 		[SerializeField] private GroundCreator _groundCreator;
+		[SerializeField] private CameraShaker _cameraShaker;
 		[SerializeField] private EnemiesPool _enemiesPool;
 		[SerializeField] private PlayerInput _playerInput;
 		[SerializeField] private PlayerCar _playerCar;
@@ -25,6 +26,7 @@ namespace TestProto
 		public override void InstallBindings()
 		{
 			Container.Bind<IReadOnlyPlayerCar>().FromInstance(_playerCar).AsSingle();
+			Container.BindInstance(_cameraShaker).AsSingle();
 			BindPools();
 			BindGame();
 		}
@@ -55,6 +57,7 @@ namespace TestProto
 			_projectilePool = FindObjectOfType<ProjectilePool>(true);
 			_enemiesSpawner = FindObjectOfType<EnemiesSpawner>(true);
 			_groundCreator = FindObjectOfType<GroundCreator>(true);
+			_cameraShaker = FindObjectOfType<CameraShaker>(true);
 			_enemiesPool = FindObjectOfType<EnemiesPool>(true);
 			_playerInput = FindObjectOfType<PlayerInput>(true);
 			_playerCar = FindObjectOfType<PlayerCar>(true);
