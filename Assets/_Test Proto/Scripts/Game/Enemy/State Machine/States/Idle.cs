@@ -6,6 +6,7 @@ namespace TestProto.Enemies.States
 	{
 		public override void Enter()
 		{
+			Animator.UpdateLocomotionAnim(0f);
 		}
 
 		public override void Perform()

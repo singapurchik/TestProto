@@ -4,6 +4,7 @@ namespace TestProto.Enemies.States
 	{
 		public override void Enter()
 		{
+			Animator.UpdateLocomotionAnim(Mover.MoveSpeedNormalized);
 		}
 
 		public override void Perform()
@@ -12,7 +13,8 @@ namespace TestProto.Enemies.States
 			{
 				var targetPosition = TargetFinder.CurrentTarget.Position;
 				Rotator.RequestRotateTo(targetPosition);
-				Mover.RequestRunTo(targetPosition);
+				Mover.RequestMoveTo(targetPosition);
+				Animator.UpdateLocomotionAnim(Mover.MoveSpeedNormalized);
 			}
 			else
 			{

@@ -6,6 +6,7 @@ namespace TestProto.Projectiles
 {
 	public class Projectile : MonoBehaviour
 	{
+		[SerializeField] private ProjectileTrigger _trigger;
 		[SerializeField] private TrailRenderer _moveTrail;
 		[SerializeField] private Transform _body;
 		[SerializeField] private float _moveSpeed = 15f;
@@ -25,15 +26,16 @@ namespace TestProto.Projectiles
 
 		public event Action<Projectile> OnMoveComplete;
 
+		private void OnDisable() => _trigger.OnTriggerTarget -= OnTriggerTarget;
+		
+		private void OnEnable() => _trigger.OnTriggerTarget += OnTriggerTarget;
+
 		public void Initialize() => gameObject.SetActive(false);
 
-		private void OnTriggerEnter(Collider other)
+		private void OnTriggerTarget(IDamageableCollider damageableCollider)
 		{
-			if (other.TryGetComponent(out IDamageableCollider damageableCollider))
-			{
-				damageableCollider.TakeDamage(_currentDamage);
-				StopMove();
-			}
+			damageableCollider.TakeDamage(_currentDamage);
+			StopMove();
 		}
 
 		private void StopMove()

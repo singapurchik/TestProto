@@ -15,6 +15,9 @@ namespace TestProto
 
 		protected void RequestTransition(State nextState)
 		{
+			if (nextState == this)
+				return;
+				
 			NextState = nextState;
 			IsReadyToTransit = true;
 			return;

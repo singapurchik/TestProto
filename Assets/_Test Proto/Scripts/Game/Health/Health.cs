@@ -3,7 +3,7 @@ using System;
 
 namespace TestProto
 {
-	public class Health : MonoBehaviour, IDamageable
+	public class Health : MonoBehaviour, IReadOnlyHealth, IDamageable
 	{
 		[SerializeField] private int _startHealth = 100;
 		
@@ -29,7 +29,7 @@ namespace TestProto
 				Heal(amount);
 		}
 
-		protected virtual void Heal(float amount)
+		private void Heal(float amount)
 		{
 			CurrentHealth += amount;
 			
@@ -39,7 +39,7 @@ namespace TestProto
 			OnTakeHeal?.Invoke();
 		}
 
-		public virtual void TryTakeDamage(float amount)
+		public void TryTakeDamage(float amount)
 		{
 			if (CurrentHealth > 0)
 			{
@@ -57,15 +57,9 @@ namespace TestProto
 			}
 		}
 
-		protected virtual void FullHealthTakeDamage()
-		{
-			OnFullHealthTakeDamage?.Invoke();
-		}
+		private void FullHealthTakeDamage() => OnFullHealthTakeDamage?.Invoke();
 
-		protected virtual void Kill()
-		{
-			OnZeroHealth?.Invoke();
-		}
+		private void Kill() => OnZeroHealth?.Invoke();
 	}
 
 }

@@ -17,7 +17,7 @@ namespace TestProto.Players
 			Container.BindInstance(_turret).WhenInjectedIntoInstance(_player);
 			Container.BindInstance(_car).WhenInjectedIntoInstance(_player);
 		}
-
+		
 #if UNITY_EDITOR
 		[Button]
 		private void FindDependencies()
